@@ -9,6 +9,10 @@
             this.LastName = lastName;
             this.Age = age;
         }
+       public Employee(string name)
+       {
+            this.Name = name;
+       }
 
         public string Name { get; private set; }
         public string LastName { get; private set;}
