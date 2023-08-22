@@ -6,8 +6,8 @@
         public void WhenCompareObject_ShouldReturnDifferentObject()
         {
             // arrange
-            var emp1 = GetEmployee("Adam");
-            var emp2 = GetEmployee("Adam");
+            var emp1 = GetEmployee("Adam", "Kowal");
+            var emp2 = GetEmployee("Adam", "Kowal");
 
             // act
 
@@ -54,9 +54,9 @@
             Assert.AreEqual(float1, float2);
         }
 
-        private Employee GetEmployee(string name)
+        private Employee GetEmployee(string name, string surname)
         {
-            return new Employee(name);
+            return new Employee(name, surname);
         }
     }
 }
