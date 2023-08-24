@@ -13,7 +13,16 @@ employee.AddGrade(gradeInInt);
 employee.AddGrade(gradeInDouble);
 employee.AddGrade(gradeInLong);
 
+/*
 var statistics = employee.GetStatistics();
 Console.WriteLine($"Average: {statistics.Average:N2}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
+*/
+
+var statistics1 = employee.GetStatisticsWithForEach();
+var statistics2 = employee.GetStatisticsWithFor();
+var statistics3 = employee.GetStatisticsWithDoWhile();
+var statistics4 = employee.GetStatisticsWithWhile();
+
+Console.WriteLine($"{statistics1.Max} = {statistics2.Max} = {statistics3.Max} = {statistics4.Max}");
