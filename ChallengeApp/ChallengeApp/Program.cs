@@ -28,12 +28,26 @@ while (true)
     if (input.Length == 1 && !(int.TryParse(input, out int i)))
     {
         char.TryParse(input, out char result);
-        employee.AddGrade(result);
 
+        try
+        {
+            employee.AddGrade(result);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine($"Exception catched: {e.Message}");
+        }
     }
     else
     {
-        employee.AddGrade(input);
+        try
+        {
+            employee.AddGrade(input);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exception catched: {e.Message}");
+        }
     }
     counter++;
 }
