@@ -115,6 +115,31 @@ namespace ChallengeApp.Tests
             // assert
             Assert.AreEqual(20, lastGrade);
         }
+        [Test]
+        public void WhenSupervisorCollect2Plus_ShouldGet25Points()
+        {
+            // arrange
+            var supervisor = new Supervisor("Jan", "Kowalski");
+            supervisor.AddGrade("2+");
 
+            // act
+            var lastGrade = supervisor.ReturnLastGrade();
+
+            // assert
+            Assert.AreEqual(25, lastGrade);
+        }
+        [Test]
+        public void WhenSupervisorCollectMinus3_ShouldGet35Points()
+        {
+            // arrange
+            var supervisor = new Supervisor("Jan", "Kowalski");
+            supervisor.AddGrade("-3");
+
+            // act
+            var lastGrade = supervisor.ReturnLastGrade();
+
+            // assert
+            Assert.AreEqual(35, lastGrade);
+        }
     } 
 }
