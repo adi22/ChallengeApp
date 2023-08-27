@@ -6,13 +6,14 @@ Console.WriteLine("Aby zakończyć wprowadzanie ocen wprowadź 'q'");
 Console.WriteLine("=======================================");
 Console.WriteLine();
 
-var counter = 0;
+var isItFirstLoop = true;
 
 while (true)
 {
-    if (counter == 0)
+    if (isItFirstLoop == true)
     {
         Console.WriteLine("Podaj ocenę:");
+        isItFirstLoop = false;
     }
     else 
     {
@@ -49,7 +50,6 @@ while (true)
             Console.WriteLine($"Exception catched: {e.Message}");
         }
     }
-    counter++;
 }
 
 var statistics = employee.GetStatistics();
@@ -57,4 +57,3 @@ Console.WriteLine();
 Console.WriteLine($"Średnia: {Math.Round(statistics.Average,2)}");
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max {statistics.Max}");
-
