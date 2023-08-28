@@ -1,64 +1,47 @@
 ﻿namespace ChallengeApp
 {
-    public class Employee : IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
         private List<float> grades = new List<float>();
 
-        public string Name { get; private set; }
-
-        public string Surname { get; private set; }
-
-        public Employee(string name, string surname)
+        public EmployeeInMemory(string name, string surname) 
+            : base(name, surname)
         {
-            this.Name = name;
-            this.Surname = surname;
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
             }
-            else 
+            else
             {
                 throw new Exception("Invalid grade value");
             }
         }
 
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
-                { 
-                this.AddGrade(result); 
-                }
+            {
+                this.AddGrade(result);
+            }
             else
             {
                 throw new Exception("String is not float");
             }
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             float result = (float)grade;
             this.AddGrade(result);
         }
 
-        public void AddGrade(double grade)
+        public override void AddGrade(char grade)
         {
-            float result = (float)grade;
-            this.AddGrade(result);
-        }
-
-        public void AddGrade(long grade)
-        {
-            float result = (float)grade;
-            this.AddGrade(result);
-        }
-
-        public void AddGrade(char grade)
-        {
-            switch(grade)
+            switch (grade)
             {
                 case 'A':
                 case 'a':
@@ -85,7 +68,7 @@
             }
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
 
@@ -102,7 +85,7 @@
 
             statistics.Average /= this.grades.Count;
 
-            switch(statistics.Average)
+            switch (statistics.Average)
             {
                 case var average when average >= 80:
                     statistics.AverageLetter = 'A';
@@ -122,18 +105,6 @@
             }
 
             return statistics;
-        }
-
-        public float ReturnLastGrade ()
-        {
-            if (this.grades.Count != 0)
-            {
-                return grades[grades.Count() - 1];
-            }
-            else
-            {
-                return 0;
-            }
         }
     }
 }
