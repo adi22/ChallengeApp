@@ -2,6 +2,7 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
+        public event GradeAddedDelegate GradeAdded;
         private const string fileName = "grades.txt";
 
         public EmployeeInFile(string name, string surname) 
@@ -16,6 +17,11 @@
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
+
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
                 }
             }
             else
@@ -51,22 +57,42 @@
                     case 'A':
                     case 'a':
                         writer.WriteLine(100);
+                        if (GradeAdded != null)
+                        {
+                            GradeAdded(this, new EventArgs());
+                        }
                         break;
                     case 'B':
                     case 'b':
                         writer.WriteLine(80);
+                        if (GradeAdded != null)
+                        {
+                            GradeAdded(this, new EventArgs());
+                        }
                         break;
                     case 'C':
                     case 'c':
                         writer.WriteLine(60);
+                        if (GradeAdded != null)
+                        {
+                            GradeAdded(this, new EventArgs());
+                        }
                         break;
                     case 'D':
                     case 'd':
                         writer.WriteLine(40);
+                        if (GradeAdded != null)
+                        {
+                            GradeAdded(this, new EventArgs());
+                        }
                         break;
                     case 'E':
                     case 'e':
                         writer.WriteLine(20);
+                        if (GradeAdded != null)
+                        {
+                            GradeAdded(this, new EventArgs());
+                        }
                         break;
                     default:
                         throw new Exception("Wrong letter");
