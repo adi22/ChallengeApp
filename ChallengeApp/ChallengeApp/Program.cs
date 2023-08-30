@@ -4,7 +4,7 @@ void EmployeeGradeAdded(object sender, EventArgs args)
     Console.WriteLine("Dodano nową ocenę");
 }
 
-var employeeFromMemory = new EmployeeInMemory("Jan", "Kowalski");
+var employeeFromMemory = new EmployeeInFile("Jan", "Kowalski");
 employeeFromMemory.GradeAdded += EmployeeGradeAdded;
 
 Console.WriteLine("Witamy w Programie do oceny pracowników");

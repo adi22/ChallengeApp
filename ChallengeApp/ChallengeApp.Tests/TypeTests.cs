@@ -53,10 +53,5 @@
             // assert
             Assert.AreEqual(float1, float2);
         }
-
-        private Employee GetEmployee(string name, string surname)
-        {
-            return new Employee(name, surname);
-        }
     }
 }

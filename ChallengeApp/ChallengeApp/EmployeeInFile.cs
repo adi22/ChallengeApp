@@ -2,7 +2,8 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
+        
         private const string fileName = "grades.txt";
 
         public EmployeeInFile(string name, string surname) 
@@ -50,49 +51,28 @@
 
         public override void AddGrade(char grade)
         {
-            using (var writer = File.AppendText(fileName))
             {
                 switch (grade)
                 {
                     case 'A':
-                    case 'a':
-                        writer.WriteLine(100);
-                        if (GradeAdded != null)
-                        {
-                            GradeAdded(this, new EventArgs());
-                        }
+                    case 'a':          
+                        AddGrade(100);                      
                         break;
                     case 'B':
                     case 'b':
-                        writer.WriteLine(80);
-                        if (GradeAdded != null)
-                        {
-                            GradeAdded(this, new EventArgs());
-                        }
+                        AddGrade(80);
                         break;
                     case 'C':
                     case 'c':
-                        writer.WriteLine(60);
-                        if (GradeAdded != null)
-                        {
-                            GradeAdded(this, new EventArgs());
-                        }
+                        AddGrade(60);
                         break;
                     case 'D':
                     case 'd':
-                        writer.WriteLine(40);
-                        if (GradeAdded != null)
-                        {
-                            GradeAdded(this, new EventArgs());
-                        }
+                        AddGrade(40);
                         break;
                     case 'E':
                     case 'e':
-                        writer.WriteLine(20);
-                        if (GradeAdded != null)
-                        {
-                            GradeAdded(this, new EventArgs());
-                        }
+                        AddGrade(20);
                         break;
                     default:
                         throw new Exception("Wrong letter");
@@ -105,74 +85,30 @@
         {
             var statistics = new Statistics();
 
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-
             if (File.Exists(fileName))
             {
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
-                    var counter = 0;
-                    var areThereAnyFloat = false;
+                    
                     while (line != null)
                     {
                         if (float.TryParse(line, out float result))
                         {
                             var number = float.Parse(line);
-                            statistics.Max = Math.Max(statistics.Max, number);
-                            statistics.Min = Math.Min(statistics.Min, number);
-                            statistics.Average += number;
+                            statistics.AddGrade(number);
 
                             line = reader.ReadLine();
-                            counter++;
-                            areThereAnyFloat = true;
+                           
                         }
                         else
                         {
                             line = reader.ReadLine();
                         }
                     }
-                    if (areThereAnyFloat == false)
-                    {
-                        statistics.Average = 0;
-                        statistics.Max = 0;
-                        statistics.Min = 0;
-                    }
-                    else
-                    {
-                        statistics.Average /= counter;
-
-                        switch (statistics.Average)
-                        {
-                            case var average when average >= 80:
-                                statistics.AverageLetter = 'A';
-                                break;
-                            case var average when average >= 60:
-                                statistics.AverageLetter = 'B';
-                                break;
-                            case var average when average >= 40:
-                                statistics.AverageLetter = 'C';
-                                break;
-                            case var average when average >= 20:
-                                statistics.AverageLetter = 'D';
-                                break;
-                            default:
-                                statistics.AverageLetter = 'E';
-                                break;
-                        }
-                    }
                 }
-                return statistics;
             }
-            else
-            {
-                statistics.Average = 0;
-                statistics.Max = 0;
-                statistics.Min = 0;
-                return statistics;
-            }
+            return statistics;
         }
     }
 }
